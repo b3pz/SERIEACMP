@@ -1,1 +1,144 @@
+SERIE A COMPARE — DATA MODE DEFINITIVO
+
+INPUT (NON MODIFICARE ALTRO)
+
+PLAYER 1 NAME: {{PLAYER_1_NAME}}
+PLAYER 1 TEAM: {{PLAYER_1_TEAM}}
+
+PLAYER 2 NAME: {{PLAYER_2_NAME}}
+PLAYER 2 TEAM: {{PLAYER_2_TEAM}}
+
+REGOLE GLOBALI (ASSOLUTE)
+
+- Tutto il testo visibile DEVE essere in ITALIANO.
+- Usa SOLO dati fattuali, verificabili e pubblici.
+- Fonte primaria obbligatoria: Wikipedia (IT/EN).
+- Non inventare, non stimare, non arrotondare numeri.
+- Se un dato non è esplicitamente verificabile su Wikipedia, scrivi "--".
+- Nessun commento extra o spiegazione non richiesta.
+- Stile editoriale calcistico, NON videogame, NON Marvel/FIFA.
+
+AMBITO DATI (LOCKED)
+
+Presenze:
+- Totale presenze con il club indicato.
+- Tutte le competizioni ufficiali.
+- Valore unico come riportato su Wikipedia.
+
+Gol:
+- Totale gol con il club indicato.
+- Tutte le competizioni ufficiali.
+- Valore unico come riportato su Wikipedia.
+
+Stagioni:
+- Numero di stagioni di prima squadra con il club.
+- Calcolo semplice dal periodo AAAA–AAAA.
+- Se non certo, scrivi "--".
+
+Trofei vinti (VERSIONE A — LOCKED):
+Includi SOLO:
+- Campionato nazionale
+- Coppa nazionale
+- Supercoppa nazionale
+- Competizioni UEFA ufficiali
+- Coppa Intercontinentale
+- FIFA Club World Cup
+
+Escludi SEMPRE:
+- Trofei giovanili
+- Amichevoli o pre-stagionali
+- Premi individuali
+- Nazionale
+- Altri club
+
+FASE 1 — COSTRUISCI LA TABELLA (TESTO OBBLIGATORIO)
+
+Prima di qualsiasi descrizione visiva, produci ESATTAMENTE questa tabella con 5 righe.
+Nessun elenco, nessuna spiegazione.
+
+TABELLA DEFINITIVA (LOCKED)
+
+Periodo
+PLAYER 1: AAAA–AAAA | PLAYER 2: AAAA–AAAA
+
+Stagioni
+PLAYER 1: X | PLAYER 2: X
+
+Presenze totali con il club
+PLAYER 1: X | PLAYER 2: X
+
+Gol totali con il club
+PLAYER 1: X | PLAYER 2: X
+
+Trofei vinti (solo col club)
+PLAYER 1: X | PLAYER 2: X
+
+VALIDAZIONE AUTOMATICA (DO/WHILE — MAX 2 PASS)
+
+- Le righe devono essere ESATTAMENTE 5.
+- Tutti i valori devono essere numeri singoli o "--".
+- Presenze, Gol e Trofei devono derivare da Wikipedia.
+- Nessun nome di competizione o stagione deve comparire.
+
+Se fallisce:
+- Rifai una sola volta in modo più conservativo.
+- Se fallisce di nuovo: STOP.
+
+Se passa:
+- Blocca i dati e procedi alla fase 2.
+
+FASE 2 — PROMPT IMMAGINE (OBBLIGATORIO)
+
+Genera UN SOLO prompt per un image generator (DALL·E).
+
+PROMPT IMMAGINE — 1080x1080
+
+Create a premium editorial football comparison poster, square format 1080x1080, museum-grade sports design, clean, timeless, highly readable on mobile.
+
+TITLE (TOP CENTER — ITALIAN):
+“{{PLAYER_1_NAME}} vs {{PLAYER_2_NAME}}” (uppercase)
+
+COMPOSITION:
+- Two half-bust portraits.
+- PLAYER 1 on the LEFT, PLAYER 2 on the RIGHT.
+- Same scale and camera height.
+- Both face the camera with a serious, iconic expression.
+
+HISTORICAL ACCURACY — KITS:
+- Kits historically accurate to club and decade.
+- Correct sponsor, cut, collar, badge size and fabric.
+- No modern reinterpretations.
+- No fantasy kits.
+
+ICONIC KIT DETAIL:
+- Show the iconic shirt number subtly but clearly.
+- Do not stylize or flatten the kit.
+
+BACKGROUND:
+- No national flags.
+- No crowd banners.
+- Editorial background with club color split and soft blurred stadium texture.
+- Avoid empty or plain white backgrounds.
+
+LIGHTING:
+- 1970s–1980s: natural daylight or warm tones.
+- 1990s: daylight or soft sunset.
+- 2000s+: neutral broadcast look.
+- Avoid night lighting before 2000.
+
+DATA TABLE:
+- Central or lower-half placement.
+- EXACTLY 5 rows.
+- Values IDENTICAL to the locked table.
+- All text in ITALIAN.
+- No extra statistics.
+
+FINAL RULES:
+- Use ONLY the provided data.
+- Do NOT add assists, matches, verdicts or comments.
+- Editorial football magazine style.
+
+OUTPUT FINALE:
+1) TABELLA DEFINITIVA (LOCKED)
+2) PROMPT IMMAGINE
 
