@@ -1,144 +1,208 @@
-SERIE A COMPARE — DATA MODE DEFINITIVO
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SERIE A COMPARE</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: radial-gradient(circle at top, #1c2533, #0b0f16);
+      color: #ffffff;
+    }
 
-INPUT (NON MODIFICARE ALTRO)
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
 
-PLAYER 1 NAME: {{PLAYER_1_NAME}}
-PLAYER 1 TEAM: {{PLAYER_1_TEAM}}
+    h1 {
+      text-align: center;
+      font-size: 42px;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
 
-PLAYER 2 NAME: {{PLAYER_2_NAME}}
-PLAYER 2 TEAM: {{PLAYER_2_TEAM}}
+    h2 {
+      text-align: center;
+      font-weight: 400;
+      color: #cfd6e4;
+      margin-bottom: 40px;
+    }
+
+    label {
+      display: block;
+      margin-top: 20px;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #cfd6e4;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 14px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      flex: 1;
+      padding: 16px;
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .primary {
+      background: #f5c542;
+      color: #000;
+    }
+
+    .secondary {
+      background: #1f2937;
+      color: #fff;
+    }
+
+    .tertiary {
+      background: #111827;
+      color: #fff;
+    }
+
+    textarea {
+      width: 100%;
+      margin-top: 30px;
+      height: 420px;
+      border-radius: 14px;
+      padding: 16px;
+      font-size: 14px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      border: none;
+      resize: vertical;
+    }
+
+    .help {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #aab2c5;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>SERIE A COMPARE</h1>
+  <h2>Confronta i tuoi campioni</h2>
+
+  <div class="row">
+    <div>
+      <label>Giocatore 1</label>
+      <input id="p1name" placeholder="Zanetti">
+    </div>
+    <div>
+      <label>Squadra 1</label>
+      <input id="p1team" placeholder="Inter">
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+      <label>Giocatore 2</label>
+      <input id="p2name" placeholder="Maldini">
+    </div>
+    <div>
+      <label>Squadra 2</label>
+      <input id="p2team" placeholder="Milan">
+    </div>
+  </div>
+
+  <div class="buttons">
+    <button class="primary" onclick="generatePrompt()">Genera prompt</button>
+    <button class="secondary" onclick="copyPrompt()">Copia prompt</button>
+    <button class="tertiary" onclick="openChatGPT()">Apri ChatGPT</button>
+  </div>
+
+  <textarea id="output" placeholder="Qui apparirà il prompt da incollare in ChatGPT..."></textarea>
+
+  <div class="help">
+    <strong>Come funziona:</strong><br>
+    1️⃣ Premi <b>Genera prompt</b><br>
+    2️⃣ Premi <b>Copia prompt</b> e incollalo in ChatGPT<br>
+    3️⃣ Invia → ChatGPT costruisce tabella + prompt immagine<br>
+    4️⃣ Usa il prompt immagine per generare l’immagine
+  </div>
+</div>
+
+<script>
+function generatePrompt() {
+  const p1n = document.getElementById("p1name").value.trim();
+  const p1t = document.getElementById("p1team").value.trim();
+  const p2n = document.getElementById("p2name").value.trim();
+  const p2t = document.getElementById("p2team").value.trim();
+
+  const prompt = `SERIE A COMPARE — DATA MODE DEFINITIVO
+
+PLAYER 1 NAME: ${p1n}
+PLAYER 1 TEAM: ${p1t}
+
+PLAYER 2 NAME: ${p2n}
+PLAYER 2 TEAM: ${p2t}
 
 REGOLE GLOBALI (ASSOLUTE)
-
 - Tutto il testo visibile DEVE essere in ITALIANO.
-- Usa SOLO dati fattuali, verificabili e pubblici.
+- Usa SOLO dati fattuali e verificabili.
 - Fonte primaria obbligatoria: Wikipedia (IT/EN).
-- Non inventare, non stimare, non arrotondare numeri.
-- Se un dato non è esplicitamente verificabile su Wikipedia, scrivi "--".
-- Nessun commento extra o spiegazione non richiesta.
-- Stile editoriale calcistico, NON videogame, NON Marvel/FIFA.
+- Non inventare numeri.
+- Se un dato non è verificabile, scrivi "--".
+- Stile editoriale calcistico, NON videogame.
 
-AMBITO DATI (LOCKED)
-
-Presenze:
-- Totale presenze con il club indicato.
-- Tutte le competizioni ufficiali.
-- Valore unico come riportato su Wikipedia.
-
-Gol:
-- Totale gol con il club indicato.
-- Tutte le competizioni ufficiali.
-- Valore unico come riportato su Wikipedia.
-
-Stagioni:
-- Numero di stagioni di prima squadra con il club.
-- Calcolo semplice dal periodo AAAA–AAAA.
-- Se non certo, scrivi "--".
-
-Trofei vinti (VERSIONE A — LOCKED):
-Includi SOLO:
-- Campionato nazionale
-- Coppa nazionale
-- Supercoppa nazionale
-- Competizioni UEFA ufficiali
-- Coppa Intercontinentale
-- FIFA Club World Cup
-
-Escludi SEMPRE:
-- Trofei giovanili
-- Amichevoli o pre-stagionali
-- Premi individuali
-- Nazionale
-- Altri club
-
-FASE 1 — COSTRUISCI LA TABELLA (TESTO OBBLIGATORIO)
-
-Prima di qualsiasi descrizione visiva, produci ESATTAMENTE questa tabella con 5 righe.
-Nessun elenco, nessuna spiegazione.
-
-TABELLA DEFINITIVA (LOCKED)
-
+FASE 1 — COSTRUISCI LA TABELLA
 Periodo
-PLAYER 1: AAAA–AAAA | PLAYER 2: AAAA–AAAA
-
 Stagioni
-PLAYER 1: X | PLAYER 2: X
-
 Presenze totali con il club
-PLAYER 1: X | PLAYER 2: X
-
 Gol totali con il club
-PLAYER 1: X | PLAYER 2: X
-
 Trofei vinti (solo col club)
-PLAYER 1: X | PLAYER 2: X
 
-VALIDAZIONE AUTOMATICA (DO/WHILE — MAX 2 PASS)
+Usa SOLO numeri singoli o "--".
 
-- Le righe devono essere ESATTAMENTE 5.
-- Tutti i valori devono essere numeri singoli o "--".
-- Presenze, Gol e Trofei devono derivare da Wikipedia.
-- Nessun nome di competizione o stagione deve comparire.
+FASE 2 — PROMPT IMMAGINE
+Crea un poster editoriale 1080x1080 con tabella IDENTICA.
 
-Se fallisce:
-- Rifai una sola volta in modo più conservativo.
-- Se fallisce di nuovo: STOP.
+STOP.`;
 
-Se passa:
-- Blocca i dati e procedi alla fase 2.
+  document.getElementById("output").value = prompt;
+}
 
-FASE 2 — PROMPT IMMAGINE (OBBLIGATORIO)
+function copyPrompt() {
+  const out = document.getElementById("output");
+  out.select();
+  document.execCommand("copy");
+  alert("Prompt copiato negli appunti");
+}
 
-Genera UN SOLO prompt per un image generator (DALL·E).
+function openChatGPT() {
+  window.open("https://chat.openai.com/", "_blank");
+}
+</script>
 
-PROMPT IMMAGINE — 1080x1080
-
-Create a premium editorial football comparison poster, square format 1080x1080, museum-grade sports design, clean, timeless, highly readable on mobile.
-
-TITLE (TOP CENTER — ITALIAN):
-“{{PLAYER_1_NAME}} vs {{PLAYER_2_NAME}}” (uppercase)
-
-COMPOSITION:
-- Two half-bust portraits.
-- PLAYER 1 on the LEFT, PLAYER 2 on the RIGHT.
-- Same scale and camera height.
-- Both face the camera with a serious, iconic expression.
-
-HISTORICAL ACCURACY — KITS:
-- Kits historically accurate to club and decade.
-- Correct sponsor, cut, collar, badge size and fabric.
-- No modern reinterpretations.
-- No fantasy kits.
-
-ICONIC KIT DETAIL:
-- Show the iconic shirt number subtly but clearly.
-- Do not stylize or flatten the kit.
-
-BACKGROUND:
-- No national flags.
-- No crowd banners.
-- Editorial background with club color split and soft blurred stadium texture.
-- Avoid empty or plain white backgrounds.
-
-LIGHTING:
-- 1970s–1980s: natural daylight or warm tones.
-- 1990s: daylight or soft sunset.
-- 2000s+: neutral broadcast look.
-- Avoid night lighting before 2000.
-
-DATA TABLE:
-- Central or lower-half placement.
-- EXACTLY 5 rows.
-- Values IDENTICAL to the locked table.
-- All text in ITALIAN.
-- No extra statistics.
-
-FINAL RULES:
-- Use ONLY the provided data.
-- Do NOT add assists, matches, verdicts or comments.
-- Editorial football magazine style.
-
-OUTPUT FINALE:
-1) TABELLA DEFINITIVA (LOCKED)
-2) PROMPT IMMAGINE
-
+</body>
+</html>
