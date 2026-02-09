@@ -5,179 +5,455 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Serie A Compare</title>
   <style>
+    :root{
+      --bg1:#0b0f14;
+      --bg2:#1b2430;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.04);
+      --text:#ffffff;
+      --muted:#cbd5e1;
+      --muted2:#94a3b8;
+      --accent:#fbbf24;
+      --btn:#1f2937;
+      --border: rgba(255,255,255,.10);
+      --shadow: 0 20px 80px rgba(0,0,0,.55);
+    }
+
     body {
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
-      background: radial-gradient(circle at top, #1b2430, #0b0f14);
-      color: #fff;
+      background:
+        radial-gradient(circle at top, var(--bg2), var(--bg1));
+      color: var(--text);
     }
+
     .container {
-      max-width: 720px;
+      max-width: 860px;
       margin: 0 auto;
-      padding: 40px 20px;
+      padding: 44px 18px;
     }
+
+    .hero{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 26px 22px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* tricolore sottile, “Serie A vibe” */
+    .hero:before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(90deg,
+          rgba(0,255,120,.10),
+          rgba(255,255,255,.06),
+          rgba(255,0,80,.10)
+        );
+      opacity:.35;
+      pointer-events:none;
+      mix-blend-mode: overlay;
+    }
+
     h1 {
+      margin: 0;
       text-align: center;
       letter-spacing: 2px;
+      font-weight: 900;
+      font-size: 44px;
+      position: relative;
+      z-index: 1;
     }
+
     h2 {
+      margin: 8px 0 18px;
       text-align: center;
-      font-weight: 400;
-      color: #cbd5e1;
-      margin-bottom: 40px;
+      font-weight: 500;
+      color: var(--muted);
+      position: relative;
+      z-index: 1;
     }
+
+    .tagline{
+      text-align:center;
+      color: var(--muted2);
+      font-size: 14px;
+      margin-bottom: 22px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
     label {
       display: block;
-      margin-top: 20px;
-      font-size: 14px;
-      color: #cbd5e1;
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--muted);
     }
+
     input {
       width: 100%;
       padding: 14px;
-      margin-top: 6px;
-      border-radius: 10px;
-      border: none;
-      font-size: 16px;
-    }
-    .row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-    .buttons {
-      display: flex;
-      gap: 12px;
-      margin-top: 30px;
-      flex-wrap: wrap;
-    }
-    button {
-      flex: 1;
-      padding: 14px;
+      margin-top: 7px;
       border-radius: 12px;
-      border: none;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,.22);
+      color: white;
       font-size: 16px;
+      outline: none;
+    }
+
+    input:focus{
+      border-color: rgba(251,191,36,.6);
+      box-shadow: 0 0 0 4px rgba(251,191,36,.15);
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    button {
+      padding: 14px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      font-size: 15px;
       cursor: pointer;
+      transition: transform .05s ease, opacity .2s ease;
     }
+
+    button:active{ transform: scale(.99); }
+
     .primary {
-      background: #fbbf24;
+      background: var(--accent);
       color: #000;
-      font-weight: 700;
+      font-weight: 900;
+      border: none;
     }
+
     .secondary {
-      background: #1f2937;
+      background: var(--btn);
       color: #fff;
     }
+
+    .ghost {
+      background: rgba(255,255,255,.06);
+      color: #fff;
+    }
+
     textarea {
       width: 100%;
-      margin-top: 30px;
+      margin-top: 18px;
       padding: 16px;
-      border-radius: 12px;
-      border: none;
-      min-height: 260px;
-      font-family: monospace;
-      font-size: 13px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,.30);
+      color: #e5e7eb;
+      min-height: 320px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 12.5px;
+      line-height: 1.45;
+      outline: none;
+      position: relative;
+      z-index: 1;
     }
+
     .steps {
-      margin-top: 20px;
+      margin-top: 14px;
+      padding: 14px 14px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--border);
+      border-radius: 16px;
       font-size: 14px;
-      color: #cbd5e1;
+      color: var(--muted);
       line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+
+    .steps b{ color: white; }
+
+    .toast{
+      margin-top: 12px;
+      font-size: 13px;
+      color: #a7f3d0;
+      display:none;
+      position: relative;
+      z-index: 1;
+    }
+    .toast.error{ color:#fecaca; }
+
+    .smallnote{
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--muted2);
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 760px){
+      h1{ font-size: 34px; }
+      .grid{ grid-template-columns: 1fr; }
+      .buttons{ grid-template-columns: 1fr; }
     }
   </style>
 </head>
+
 <body>
+  <div class="container">
+    <div class="hero">
+      <h1>SERIE A COMPARE</h1>
+      <h2>Confronta i tuoi campioni</h2>
+      <div class="tagline">Inserisci nome + squadra (Serie A o storico) e genera il prompt “pro” pronto da incollare.</div>
 
-<div class="container">
-  <h1>SERIE A COMPARE</h1>
-  <h2>Confronta i tuoi campioni</h2>
+      <div class="grid">
+        <div>
+          <label>Giocatore 1</label>
+          <input id="p1name" placeholder="Zanetti" value="Zanetti">
+        </div>
+        <div>
+          <label>Squadra 1</label>
+          <input id="p1team" placeholder="Inter" value="Inter">
+        </div>
 
-  <div class="row">
-    <div>
-      <label>Giocatore 1</label>
-      <input id="p1name" placeholder="Zanetti">
-    </div>
-    <div>
-      <label>Squadra 1</label>
-      <input id="p1team" placeholder="Inter">
+        <div>
+          <label>Giocatore 2</label>
+          <input id="p2name" placeholder="Maldini" value="Maldini">
+        </div>
+        <div>
+          <label>Squadra 2</label>
+          <input id="p2team" placeholder="Milan" value="Milan">
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button class="primary" onclick="generatePrompt()">Genera prompt</button>
+        <button class="secondary" onclick="copyPrompt()">Copia prompt</button>
+        <button class="ghost" onclick="copyAndOpenChatGPT()">Copia + Apri ChatGPT</button>
+      </div>
+
+      <textarea id="output" placeholder="Qui comparirà il prompt da incollare in ChatGPT..."></textarea>
+
+      <div id="toast" class="toast">Copiato ✅</div>
+
+      <div class="steps">
+        <b>Come funziona (zero confusione):</b><br>
+        1) Premi <b>Genera prompt</b><br>
+        2) Premi <b>Copia + Apri ChatGPT</b><br>
+        3) In ChatGPT: <b>incolla</b> → invia → quando compare <b>PROMPT IMMAGINE</b> chiedi/genera l’immagine con quello (se ChatGPT può farlo lo farà subito).<br>
+        <span class="smallnote">Nota: il sito non può “scrivere” dentro ChatGPT in automatico (limite tecnico). Per questo copiamo negli appunti.</span>
+      </div>
     </div>
   </div>
-
-  <div class="row">
-    <div>
-      <label>Giocatore 2</label>
-      <input id="p2name" placeholder="Maldini">
-    </div>
-    <div>
-      <label>Squadra 2</label>
-      <input id="p2team" placeholder="Milan">
-    </div>
-  </div>
-
-  <div class="buttons">
-    <button class="primary" onclick="generatePrompt()">Genera prompt</button>
-    <button class="secondary" onclick="copyPrompt()">Copia prompt</button>
-    <button class="secondary" onclick="openChatGPT()">Apri ChatGPT</button>
-  </div>
-
-  <textarea id="output" placeholder="Qui comparirà il prompt da incollare in ChatGPT..."></textarea>
-
-  <div class="steps">
-    <b>Come funziona:</b><br>
-    1) Genera il prompt<br>
-    2) Copialo e incollalo in ChatGPT<br>
-    3) Usa il PROMPT IMMAGINE che ChatGPT restituisce
-  </div>
-</div>
 
 <script>
-function generatePrompt() {
-  const p1name = document.getElementById("p1name").value.trim();
-  const p1team = document.getElementById("p1team").value.trim();
-  const p2name = document.getElementById("p2name").value.trim();
-  const p2team = document.getElementById("p2team").value.trim();
+  function derbyLabel(teamA, teamB){
+    const a = (teamA || "").trim().toLowerCase();
+    const b = (teamB || "").trim().toLowerCase();
+    const key = [a,b].sort().join("|");
 
-  const prompt = `
-SERIE A COMPARE — DATA MODE DEFINITIVO
+    const map = {
+      "inter|milan": "DERBY DELLA MADONNINA",
+      "inter|juventus": "DERBY D’ITALIA",
+      "juventus|milan": "CLASSICA DEL CALCIO ITALIANO",
+      "lazio|roma": "DERBY DELLA CAPITALE",
+      "juventus|torino": "DERBY DELLA MOLE",
+      "genoa|sampdoria": "DERBY DELLA LANTERNA",
+      "fiorentina|juventus": "DERBY DELL’APPENNINO",
+      "napoli|roma": "DERBY DEL SOLE"
+    };
 
+    return map[key] || "";
+  }
+
+  function cleanInputOrPlaceholder(id){
+    const el = document.getElementById(id);
+    const v = (el.value || "").trim();
+    if (v) return v;
+    return (el.getAttribute("placeholder") || "").trim();
+  }
+
+  function showToast(msg, isError=false){
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.className = "toast" + (isError ? " error" : "");
+    t.style.display = "block";
+    setTimeout(()=> t.style.display = "none", 1700);
+  }
+
+  function generatePrompt() {
+    const p1name = cleanInputOrPlaceholder("p1name");
+    const p1team = cleanInputOrPlaceholder("p1team");
+    const p2name = cleanInputOrPlaceholder("p2name");
+    const p2team = cleanInputOrPlaceholder("p2team");
+
+    if(!p1name || !p1team || !p2name || !p2team){
+      showToast("Compila tutti i campi.", true);
+      return;
+    }
+
+    const derby = derbyLabel(p1team, p2team);
+
+    const prompt = `
+SERIE A COMPARE — DATA MODE (PRO) — INCOLLA E INVIA
+
+INPUT (NON MODIFICARE ALTRO)
 PLAYER 1 NAME: ${p1name}
 PLAYER 1 TEAM: ${p1team}
-
 PLAYER 2 NAME: ${p2name}
 PLAYER 2 TEAM: ${p2team}
 
-REGOLE ASSOLUTE
+REGOLE ASSOLUTE (LOCKED)
 - Tutto il testo visibile DEVE essere in ITALIANO.
-- Usa SOLO dati fattuali e verificabili (Wikipedia IT/EN).
-- Non inventare numeri.
-- Se un valore non è certo, scrivi "--".
+- Fonte primaria OBBLIGATORIA: Wikipedia (IT/EN). Se un dato non è chiaramente verificabile su Wikipedia, scrivi “--”.
+- NON inventare, NON stimare, NON arrotondare.
+- Se il nome è ambiguo (omonimi), ferma tutto e scrivi: “DATA VALIDATION: FAILED (ambiguità identità)”.
 
-FASE 1 — COSTRUISCI LA TABELLA (TESTO)
+DERBY (SOLO SE APPLICABILE)
+- Se la coppia di squadre corrisponde a una voce della mappa derby, mostra l’etichetta derby ESATTA.
+- Se non corrisponde, NON mostrare nessuna etichetta derby.
+MAPPA DERBY:
+Inter vs Milan → “DERBY DELLA MADONNINA”
+Inter vs Juventus → “DERBY D’ITALIA”
+Milan vs Juventus → “CLASSICA DEL CALCIO ITALIANO”
+Roma vs Lazio → “DERBY DELLA CAPITALE”
+Torino vs Juventus → “DERBY DELLA MOLE”
+Genoa vs Sampdoria → “DERBY DELLA LANTERNA”
+Fiorentina vs Juventus → “DERBY DELL’APPENNINO”
+Napoli vs Roma → “DERBY DEL SOLE”
+
+TROFEI VINTI — VERSIONE A (LOCKED)
+Conta SOLO trofei vinti CON il club indicato, nel periodo di quel club:
+- Campionato nazionale
+- Coppa nazionale
+- Supercoppa nazionale
+- Competizioni UEFA ufficiali
+- Coppa Intercontinentale
+- FIFA Club World Cup
+ESCLUDI SEMPRE: giovanili, amichevoli, pre-stagionali, premi individuali, nazionale, altri club.
+
+STATISTICHE (LOCKED)
+- Presenze totali con il club = TOTALE presenze col club indicato (tutte le competizioni ufficiali), valore unico come su Wikipedia.
+- Gol totali con il club = TOTALE gol col club indicato (tutte le competizioni ufficiali), valore unico come su Wikipedia.
+- Stagioni = numero stagioni di prima squadra col club (calcolo semplice dal Periodo AAAA–AAAA se certo; altrimenti “--”).
+
+FASE 1 — COSTRUISCI LA TABELLA (OBBLIGATORIO)
+Prima di qualsiasi descrizione grafica, stampa ESATTAMENTE questa tabella con 5 righe, SENZA elenchi e SENZA spiegazioni extra:
+
 Periodo
+AAAA–AAAA | AAAA–AAAA
+
 Stagioni
+X | X
+
 Presenze totali con il club
+X | X
+
 Gol totali con il club
+X | X
+
 Trofei vinti (solo col club)
+X | X
 
-FASE 2 — PROMPT IMMAGINE
-Poster editoriale 1080x1080.
-La tabella nell’immagine DEVE essere IDENTICA.
+FASE 1.5 — VALIDAZIONE AUTOMATICA (DO/WHILE MAX 2 PASS)
+- Controlla che siano ESATTAMENTE 5 righe e che ogni valore sia un singolo intero o “--”.
+- Presenze/Gol devono essere TOTALI col club (tutte le competizioni) da Wikipedia.
+- Trofei: SOLO col club indicato e SOLO categorie ammesse.
+Se fallisce: rifai 1 volta in modo più conservativo. Se fallisce di nuovo: STOP.
 
-STOP.
+SE VALIDAZIONE PASSA:
+Scrivi una riga singola: “AUTO-OK ✅”
+Poi vai subito alla FASE 2.
+
+FASE 2 — PROMPT IMMAGINE (OBBLIGATORIO, NON FERMARTI)
+Scrivi un SOLO blocco chiamato “PROMPT IMMAGINE (COPIA E INCOLLA)” per un generatore immagini (DALL·E / image generator).
+Il poster deve essere 1080x1080, editoriale “magazine”, NON videogame.
+
+REQUISITI GRAFICI (LOCKED, ANTI-FREDDO)
+- Sfondo: split in due colori ispirati alle maglie dei club + stadio coerente e sfocato (NO bandiere nazionali, NO banner sugli spalti).
+- Inserisci grana editoriale leggera, texture carta/foto, look “rivista sportiva”.
+- Illuminazione coerente con l’epoca:
+  • 1970–1980: luce naturale calda / tardo pomeriggio
+  • 1990: daylight o soft sunset (NO notte)
+  • 2000–2009: neutra, look digitale early-2000
+  • 2010+: broadcast moderno
+  • Evita illuminazione notturna prima del 2000
+- Maglie: storicamente corrette per club e decade (sponsor/collar/taglio coerenti; nessuno sponsor fantasy).
+- Pose: due mezzi busti, PLAYER 1 a sinistra, PLAYER 2 a destra, entrambi guardano in camera.
+- Numeri iconici: se certi, mostrali in modo chiaro (anche come maglia piegata in basso vicino a ciascun giocatore). Se non certi, NON inventare: ometti.
+- Titolo in alto: “${p1name.toUpperCase()} vs ${p2name.toUpperCase()}”
+- Etichetta derby sotto il titolo SOLO se applicabile: ${derby ? `"${derby}"` : "NESSUNA (non mostrare etichetta derby)"}
+- Tabella dati: deve apparire nel poster ed essere IDENTICA ai valori della tabella bloccata (stesse 5 righe, stessi numeri, stesso testo italiano).
+- Vietato aggiungere: assist, “matches”, giudizi, note, statistiche extra, liste di trofei.
+
+OUTPUT FINALE (OBBLIGATORIO)
+1) Stampa la tabella (5 righe) con i valori definitivi.
+2) Stampa “AUTO-OK ✅”.
+3) Stampa “PROMPT IMMAGINE (COPIA E INCOLLA)” completo.
+NON aggiungere altro testo.
 `.trim();
 
-  document.getElementById("output").value = prompt;
-}
+    document.getElementById("output").value = prompt;
+    showToast("Prompt generato ✅");
+  }
 
-function copyPrompt() {
-  const out = document.getElementById("output");
-  out.select();
-  document.execCommand("copy");
-}
+  async function copyPrompt() {
+    const out = document.getElementById("output");
+    const text = out.value || "";
+    if(!text.trim()){
+      showToast("Prima genera il prompt.", true);
+      return;
+    }
 
-function openChatGPT() {
-  window.open("https://chat.openai.com/", "_blank");
-}
+    try{
+      if(navigator.clipboard && window.isSecureContext){
+        await navigator.clipboard.writeText(text);
+      }else{
+        // fallback vecchio
+        out.focus();
+        out.select();
+        document.execCommand("copy");
+      }
+      showToast("Copiato ✅");
+    }catch(e){
+      // fallback
+      try{
+        out.focus();
+        out.select();
+        document.execCommand("copy");
+        showToast("Copiato ✅");
+      }catch(err){
+        showToast("Copia non riuscita. Seleziona e copia a mano.", true);
+      }
+    }
+  }
+
+  async function copyAndOpenChatGPT() {
+    await copyPrompt();
+    // apre ChatGPT in nuova scheda
+    window.open("https://chat.openai.com/", "_blank");
+  }
+
+  // autogenera al primo load (comodità demo)
+  window.addEventListener("load", () => {
+    generatePrompt();
+  });
 </script>
 
 </body>
